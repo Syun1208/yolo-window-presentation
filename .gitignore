@@ -5,3 +5,4 @@ tools/__pycache__/
 test/test/
 __pycache__/
 test.zip
+obj/
