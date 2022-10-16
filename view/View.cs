@@ -216,12 +216,12 @@ namespace AdvancedTopicInCE.view
         //     MySqlCommand cmd = new MySqlCommand(query, dbc);
         //     cmd.ExecuteNonQuery();
         // }
-        public void DeleteImage(ObjectInformation object, string Class){
+        public void DeleteSomeInference(string Class){
             dbc.Open();
-            string query = 'DELETE FROM user_table WHERE Class =  @ObjectInformationClass';
+            string query = 'DELETE FROM user_table WHERE Class =  @stringClass';
             MySqlCommand cmd = new MySqlCommand(query, dbc);
             cmd.CommandType = CommandType.Text; 
-            cmd.Parameters.Add('@ObjectInformationClass', MySqlDbType.VarChar).Value = user.Id;
+            cmd.Parameters.Add('@stringClass', MySqlDbType.VarChar).Value = Class;
             try{
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Deleted Successfully.", 'Information', MessageBoxButtons.OK, MessageBoxIcon.Information);
