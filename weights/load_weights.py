@@ -1,9 +1,11 @@
 import sys
+
 sys.path.insert(0, '/home/long/Desktop/AdvancedTopicInCE/yolov5')
 import torch
 from yolov5.utils.downloads import attempt_download
 from yolov5.utils.general import intersect_dicts
 from yolov5.models.common import DetectMultiBackend
+
 
 class weights:
     def __init__(self):
@@ -11,6 +13,7 @@ class weights:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.providers = ['CUDAExecutionProvider', 'CPUExecutionProvider'] if self.cuda else ['CPUExecutionProvider']
         self.names = ['top-cmnd', 'back-cmnd', 'top-cccd', 'back-cccd', 'top-chip', 'back-chip', 'passport', 'rotate']
+
     def modelYOLOv5(self, path, classes=8):
         model = DetectMultiBackend(path, device=self.device, fuse=True)
         ckpt = torch.load(attempt_download(path), map_location=self.device)  # load

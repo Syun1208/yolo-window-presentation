@@ -7,6 +7,7 @@ import cv2
 import tqdm
 from tabulate import tabulate
 
+
 def parse_arg():
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, help='initial weights path', default='weights/yolov7/best.onnx')
@@ -19,6 +20,7 @@ def parse_arg():
     parser.add_argument('--device', default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     parser.add_argument("--coordinate", "--coords", help="comma seperated list of source points")
     return parser.parse_args()
+
 
 def predict(image):
     pretrainedModel = weights()
@@ -33,34 +35,36 @@ def predict(image):
         for i in tqdm.tqdm(range(len(name)), total=len(name)):
             coordinate[i] = np.array(coordinate[i])
             results = {"class_id": classes.index(name[i]), "class_name": name[i],
-                    "bbox_coordinates": coordinate[i].tolist(),
-                    "confidence_score": score[i]}
+                       "bbox_coordinates": coordinate[i].tolist(),
+                       "confidence_score": score[i]}
             coordinateBoundingBox.append(results)
         return coordinateBoundingBox, image
-    except Exception:
+    except Exception as error:
+        print(error)
         text1 = ["NOTICE"]
         text2 = [["PLEASE TRY AGAIN !"], ["SUGGESTION: PUT YOUR IMAGE INCLUDING BACKGROUND"]]
         print(tabulate(text2, text1, tablefmt="pretty"))
         return {'status': 'try again'}, image
+
 
 def main(args):
     pretrainedModel = weights()
     pretrainedYOLO = 0
     originalImage = cv2.imread(args.img_path)
     image = np.array(cv2.imread(args.img_path))
-    coordinateCompute = []
-    pretrainedYOLO = pretrainedModel.modelYOLOv5(args.weights)
-    modelYOLO = detection(cv2.imread(args.img_path))
-    coordinate, score, name, image = modelYOLO.v5(pretrainedYOLO)
-    coordinate, score = nms(coordinate, score, 0.4)
-    print('[INFO] NON MAX SUPPRESSION: ', coordinate)
-    cv2.imwrite('/home/long/Downloads/datasets/datasetsRotation/correctingImages/my1.jpg', image)
     try:
-        pass
-    except Exception:
+        pretrainedYOLO = pretrainedModel.modelYOLOv5(args.weights)
+        modelYOLO = detection(cv2.imread(args.img_path))
+        coordinate, score, name, image = modelYOLO.v5(pretrainedYOLO)
+        coordinate, score = nms(coordinate, score, 0.4)
+        print('[INFO] NON MAX SUPPRESSION: ', coordinate)
+        cv2.imwrite('/home/long/Downloads/datasets/datasetsRotation/correctingImages/my1.jpg', image)
+    except Exception as error:
+        print(error)
         text1 = ["NOTICE"]
         text2 = [["PLEASE TRY AGAIN !"], ["SUGGESTION: PUT YOUR IMAGE INCLUDING BACKGROUND"]]
         print(tabulate(text2, text1, tablefmt="pretty"))
+
 
 if __name__ == '__main__':
     args = parse_arg()

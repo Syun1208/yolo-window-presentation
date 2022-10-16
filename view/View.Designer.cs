@@ -1,4 +1,4 @@
-namespace MiAI
+namespace AdvancedTopicInCE.view
 {
     partial class Form1
     {
@@ -51,7 +51,7 @@ namespace MiAI
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(197, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "NGUYEN CHIEN THANG";
+            this.textBox1.Text = "PHAM MINH LONG";
             // 
             // pictureBox1
             // 

@@ -1,0 +1,5 @@
+/home/long/Desktop/AdvancedTopicInCE/obj/Debug/net5.0/AdvancedTopicInCE.csproj.AssemblyReference.cache
+/home/long/Desktop/AdvancedTopicInCE/obj/Debug/net5.0/AdvancedTopicInCE.GeneratedMSBuildEditorConfig.editorconfig
+/home/long/Desktop/AdvancedTopicInCE/obj/Debug/net5.0/AdvancedTopicInCE.AssemblyInfoInputs.cache
+/home/long/Desktop/AdvancedTopicInCE/obj/Debug/net5.0/AdvancedTopicInCE.AssemblyInfo.cs
+/home/long/Desktop/AdvancedTopicInCE/obj/Debug/net5.0/AdvancedTopicInCE.csproj.CoreCompileInputs.cache

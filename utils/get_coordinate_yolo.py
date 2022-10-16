@@ -1,6 +1,7 @@
 import torch
 import cv2
 
+
 class detection:
     def __init__(self, image):
         self.image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
