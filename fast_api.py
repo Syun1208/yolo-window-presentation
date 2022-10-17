@@ -10,7 +10,10 @@ from main import predict
 import numpy as np
 from pathlib import Path
 import os
+import socket
 import sys
+
+
 app_desc = """<h2>Try this app by uploading any image with `predict/image`</h2>"""
 app = FastAPI(title="Chúa tể phát hiện cccd/cmnd", description=app_desc)
 DETECTION_URL = '/id-card-yolo/detect/'
@@ -19,10 +22,14 @@ ROOT = FILE.parents[0]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+LOCAL_HOST = socket.gethostname()
+IP_ADDRESS = socket.gethostbyname(LOCAL_HOST)
+
+
 def parse_arg():
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, help='initial weights path', default='weights\\best.pt')
-    parser.add_argument('--local_host', type=str, help='your local host connection', default='0.0.0.0')
+    parser.add_argument('--local_host', type=str, help='your local host connection', default=IP_ADDRESS)
     parser.add_argument('--folder_save_detection', type=str,
                         default=str(ROOT / 'results/detect'),
                         required=False)
